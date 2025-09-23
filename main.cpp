@@ -6,7 +6,7 @@
 
 #include "common.h"
 #include "InputFunctions.h"
-#include "Printfunctions.h"
+#include "PrintFunctions.h"
 #include "SizeFunctions.h"
 #include "SortFunctions.h"
 
@@ -78,7 +78,7 @@ int main() {
 
    // print_text(array_of_ptr, symbols_num);
     //printf("printing arrays after sorting by start\n");
-    My_Sort (&text_sorted, Comparator);
+    my_sort (&text_sorted, comparator);
     print_text (&text_sorted, str_count);
     //printf("printing arrays after sorting by end\n");
     //char **array_reversed = My_Sort (array_of_ptr, str_count, ComparatorReverse);

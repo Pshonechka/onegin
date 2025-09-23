@@ -12,7 +12,7 @@
 // int Comparator (const void* par1, const void* par2)
 // char* str1 = *(char**) par1
 
-int Comparator (const void *par1, const void *par2) {
+int сomparator (const void *par1, const void *par2) {
     char *str1 = *(char**) par1;
     char *str2 = *(char**) par2;
     int l1 = strlen_1(str1);
@@ -63,7 +63,7 @@ int Comparator (const void *par1, const void *par2) {
     return 0;*/
 }
 
-int ComparatorReverse (const void *par1, const void *par2) {
+int сomparator_кeverse (const void *par1, const void *par2) {
     char *str1 = *(char**) par1;
     char *str2 = *(char**) par2;
     l1 = strlen_1(str1);
@@ -146,7 +146,7 @@ int skip_rev(char *str, int l, int x) { //  l длина х номер симв�
     return array_with_letters;
 }*/
 
-void My_Sort (struct info *Onegin, int (* MyCompare)(const void *, const void *)) {
+void my_sort (struct info *Onegin, int (* my_compare)(const void *, const void *)) {
     char **array_of_ptr = Onegin -> array_of_pointers;
     int str_count = Onegin -> lines_count;
     int i, j = 0;
@@ -154,7 +154,7 @@ void My_Sort (struct info *Onegin, int (* MyCompare)(const void *, const void *)
         for (j = 0; j < str_count - i; j++) {
           //  printf("%p\n", array_of_ptr[j]);
             //printf("%d", t);
-            if (MyCompare(array_of_ptr[j], array_of_ptr[j+1]) > 0) {
+            if (my_compare(array_of_ptr[j], array_of_ptr[j+1]) > 0) {
                 char *c = array_of_ptr[j];
                 array_of_ptr[j] = array_of_ptr[j+1];
                 array_of_ptr[j+1] = c;
