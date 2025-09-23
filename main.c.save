@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
+
+int main()
+{
+    FILE *fp = fopen("emoboy", "r");
+    if (fp == 0) {
+        printf("Error in opening file");
+    }
+
+    fseek(fp, 0L, SEEK_END);
+    int n = ftell(fp);
+    fseek(fp, 0L, SEEK_SET);
+
+    char *ptr = (char*) calloc(n, sizeof(char));
+    if ( (char*) calloc(n, sizeof(char)) == NULL) {
+        printf("Error in creating array\n");
+        return 0;
+    }
+    size_t read_size =  fread(ptr, sizeof(char), n, fp);
+    if (read_size != (size_t) n) {
+        printf("Array sizes aren't equal\n");
+        return 0;
+    }
+    int i;
+    while ((i = getchar(ptr)) != EOF) {
+        putchar(i);
+        putchar(i);
+    }
+    return 0;
+    }
+}
