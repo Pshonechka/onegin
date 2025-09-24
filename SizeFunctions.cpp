@@ -7,15 +7,16 @@
 #include "SizeFunctions.h"
 
 void size_file (struct info *Onegin) {
-    FILE *fp = Onegin -> *text;
+    FILE *fp = Onegin -> text;
     fseek(fp, 0L, SEEK_END);
     int symbols_count = ftell(fp);
     fseek(fp, 0L, SEEK_SET);
-    Onegin->symbols_count = symbols_count;
+    Onegin->symbols_count = symbols_count - 1;
 }
 
-void num_str (char *arr, struct info *Onegin) {
+void num_str (struct info *Onegin) {
     int symbols_num = Onegin -> symbols_count;
+    char *arr = Onegin -> buffer;
     int str_count = 0;
     for (int i = 0; i < symbols_num; i++) {
        if (arr[i] == '\n') {
@@ -25,7 +26,7 @@ void num_str (char *arr, struct info *Onegin) {
     Onegin->lines_count = str_count;
 }
 
-int strlen_1 (char *str) {
+int strlen_1 (const char *str) {
 int c = 0;
     for (int i = 0; str[i] != '\0' && str[i] != '\n'; i++) {
         c++;

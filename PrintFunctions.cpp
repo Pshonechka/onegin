@@ -6,17 +6,39 @@
 #include "common.h"
 #include "PrintFunctions.h"
 
-void printf_str(char* str) {
+void printf_str(const char* str) {
     for(int i = 0; str[i] != '\n' && str[i] != '\0'; i++) {
         putchar(str[i]); // fputc(str[i], stream)
     }
     putchar('\n');
 }
 
-void print_text(struct info *Onegin, int str_count) {
-    char** array = Onegin->array_of_pointers;
+
+void put_str(const char* str, struct info *Onegin) {
+    FILE* fp = Onegin -> ans;
+    for(int i = 0; str[i] != '\n' && str[i] != '\0'; i++) {
+        fputs(&str[i], fp); // fputc(str[i], stream)
+    }
+    putchar('\n');
+}
+
+void print_text(struct info *Onegin) {
+    char** array = Onegin -> array_of_pointers;
+    int str_count = Onegin -> lines_count;
     for (int i = 0; i < str_count; i++) {
         printf("line %d: ", i);
         printf_str(array[i]); // my_fputs(array[i], stream)
+    }
+}
+
+void put_text(struct info *Onegin) {
+    assert(Onegin != NULL);
+    assert(Onegin->array_of_pointers != NULL);
+
+    char** array = Onegin -> array_of_pointers;
+    int str_count = Onegin -> lines_count;
+    for (int i = 0; i < str_count; i++) {
+        printf("line %d: ", i);
+        put_str(array[i], Onegin); // my_fputs(array[i], stream)
     }
 }

@@ -12,18 +12,18 @@
 // int Comparator (const void* par1, const void* par2)
 // char* str1 = *(char**) par1
 
-int сomparator (const void *par1, const void *par2) {
-    char *str1 = *(char**) par1;
-    char *str2 = *(char**) par2;
+int comparator (const void *par1, const void *par2) {
+    const char *str1 = *(char* const*) par1;
+    const char *str2 = *(char* const*) par2;
     int l1 = strlen_1(str1);
     int l2 = strlen_1(str2);
-    minl = min(l1,l2);
+    int minl = min(l1,l2);
     int i1, i2 = 0;
     while (str1[i1] < minl && str2[i2] < minl) {
-        k1 = skip_to_alpha(str1, l1, i1);
-        k2 = skip_to_alpha(str2, l2, i2);
-        s1 = tolower(str1[i1 + k1]);
-        s2 = tolower(str1[i2 + k2]);
+        int k1 = skip_to_alpha(str1, l1, i1);
+        int k2 = skip_to_alpha(str2, l2, i2);
+        int s1 = tolower(str1[i1 + k1]);
+        int s2 = tolower(str1[i2 + k2]);
         if (s1 < s2) {
             return -1;
         }
@@ -63,19 +63,19 @@ int сomparator (const void *par1, const void *par2) {
     return 0;*/
 }
 
-int сomparator_кeverse (const void *par1, const void *par2) {
-    char *str1 = *(char**) par1;
-    char *str2 = *(char**) par2;
-    l1 = strlen_1(str1);
-    l2 = strlen_1(str2);
-    minl = min(l1,l2);
+int comparator_reverse (const void *par1, const void *par2) {
+    const char *str1 = *(char* const*) par1;
+    const char *str2 = *(char* const*) par2;
+    int l1 = strlen_1(str1);
+    int l2 = strlen_1(str2);
+    int minl = min(l1,l2);
     int i1 = l1 - 1;
     int i2 = l2 - 1;
     while (minl > 0) {
-        k1 = skip_rev(str1, l1, i1);
-        k2 = skip_rev(str2, l2, i2);
-        s1 = tolower(str1[i1 + k1]);
-        s2 = tolower(str1[i2 + k2]);
+        int k1 = skip_rev(str1, i1);
+        int k2 = skip_rev(str2, i2);
+        int s1 = tolower(str1[i1 + k1]);
+        int s2 = tolower(str1[i2 + k2]);
         if (s1 < s2) {
             return -1;
         }
@@ -84,13 +84,13 @@ int сomparator_кeverse (const void *par1, const void *par2) {
         }
         i1--;
         i2--;
-        min1--;
+        minl--;
     }
     return 0;
 }
 
 
-int skip_to_alpha(char *str, int l, int x) { // в аргументы l1/l2
+int skip_to_alpha(const char *str, int l, int x) { // в аргументы l1/l2
     if (isalpha(str[x]) != 0) {
             return 0;
     }
@@ -103,11 +103,12 @@ int skip_to_alpha(char *str, int l, int x) { // в аргументы l1/l2
     return c;
 }
 
-int skip_rev(char *str, int l, int x) { //  l длина х номер символа с конца
+int skip_rev(const char *str, int x) { //  l длина х номер символа с конца
     if (isalpha(str[x]) != 0) {
             return 0;
     }
-    for (i = x; i > 0; i--) {
+    int c = 0;
+    for (int i = x; i > 0; i--) {
         while (isalpha(str[i]) == 0) {
             c++;
         }

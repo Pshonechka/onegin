@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <strings.h>
-#include <ctype.h>
-#include <math.h>
-
 #include "common.h"
 #include "InputFunctions.h"
 #include "PrintFunctions.h"
@@ -30,10 +24,17 @@ Destructor of struct
 */
 
 int main() {
-    struct info text_sorted = {.text = NULL, .array_of_pointers = NULL, .lines_count = 0, .symbols_count = 0};
-    struct info text_sorted_from_end = {.text = NULL, .array_of_pointers = NULL, .lines_count = 0, .symbols_count = 0};
+    struct info text_sorted = {.text = NULL, .buffer = NULL, .array_of_pointers = NULL, .lines_count = 0, .symbols_count = 0, .ans = NULL};
+    struct info text_sorted_from_end = {.text = NULL, .buffer = NULL, .array_of_pointers = NULL, .lines_count = 0, .symbols_count = 0, .ans = NULL};
     opening_file(&text_sorted);
+    // fseek()
     opening_file(&text_sorted_from_end);
+    FILE *output = fopen("answers.txt", "w");
+    if (output == 0) {
+        printf("Error in opening file");
+    }
+    text_sorted.ans = output;
+    text_sorted_from_end.ans = output;
     ///FILE *fp = opening_file();
     /*FILE *fp = fopen("emoboy.txt", "rb");
     if (fp == 0) {
@@ -44,19 +45,20 @@ int main() {
     size_file (&text_sorted_from_end);
 
     //printf("file size: %d\n", symbols_num);
-    char *book  = get_arr(&text_sorted);
-
+    text_sorted.buffer = get_arr(&text_sorted);
+    text_sorted_from_end.buffer = get_arr(&text_sorted);
     //printf("text:\n %s\n", book);
     //[a][b][c]['\n'][f][g]['\0']
     //[0x100][0x200][0x300][0]
     //todo: function
-    num_str (book, &text_sorted);
-    num_str (book, &text_sorted_from_end);
+    num_str (&text_sorted);
+    num_str (&text_sorted_from_end);
     int str_count = text_sorted.lines_count;
-    char **ptrs_from_start = (char**) calloc((str_count+1), sizeof(char*));
-    char **ptrs_from_end = (char**) calloc((str_count+1), sizeof(char*));
-    fill_pointer_arr(book, ptrs_from_start, &text_sorted);
-    fill_pointer_arr(book, ptrs_from_end, &text_sorted_from_end);
+    text_sorted.array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+    text_sorted_from_end.array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+    fill_pointer_arr(&text_sorted);
+    fill_pointer_arr(&text_sorted_from_end);
+
        // printf("%p", book[0]);
     //printf("printing ptrs before parsing:\n");
      //book[0] === *(book + i), &(book+i)
@@ -77,9 +79,15 @@ int main() {
     }*/
 
    // print_text(array_of_ptr, symbols_num);
-    //printf("printing arrays after sorting by start\n");
+    printf("printing arrays after sorting by start\n");
     my_sort (&text_sorted, comparator);
-    print_text (&text_sorted, str_count);
+
+    fprintf(stdout, "line1 = %s\n", text_sorted.array_of_pointers[0]);
+    fprintf(stdout, "line2 = %s\n", text_sorted.array_of_pointers[1]);
+    fprintf(stdout, "line3 = %s\n", text_sorted.array_of_pointers[2]);
+
+    print_text (&text_sorted);
+    put_text(&text_sorted);
     //printf("printing arrays after sorting by end\n");
     //char **array_reversed = My_Sort (array_of_ptr, str_count, ComparatorReverse);
     //print_text (array_reversed, str_count);
@@ -90,7 +98,7 @@ int main() {
     printf("end");*/
     //print_text (array_reversed, str_count);*/
   //  strcpy_1(str1, str2);
-    free (book);
+    free (text_sorted_from_end.array_of_pointers);
     free (text_sorted.array_of_pointers);
 }
 
