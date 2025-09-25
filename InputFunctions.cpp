@@ -7,7 +7,7 @@
 #include "InputFunctions.h"
 
 void opening_file(struct info *Onegin) {
-    FILE *fp = fopen("emoboy.txt", "rb");
+    FILE *fp = fopen("oneginfull.txt", "rb");
     if (fp == 0) {
         printf("Error in opening file");
     }
@@ -23,8 +23,7 @@ char *get_arr(struct info *Onegin) {
         return NULL;
     }
 
-    size_t read_size = fread(ptr, sizeof(char), symbols_num - 1, fp);
-    puts(ptr);
+    size_t read_size = fread(ptr, sizeof(char), symbols_num, fp);
 
     if (read_size != (size_t) symbols_num) {
         // printf("%llu", read_size);
@@ -42,7 +41,6 @@ void fill_pointer_arr(struct info *Onegin) {
     char ** array_of_ptr = Onegin -> array_of_pointers;
     char *from = Onegin -> buffer;
     array_of_ptr[0] = from;
-
     int symbols_num = Onegin -> symbols_count;
     int str_count = Onegin -> lines_count;
     int x = 0;
@@ -59,6 +57,5 @@ void fill_pointer_arr(struct info *Onegin) {
             }
         }
     }
-    Onegin -> array_of_pointers = array_of_ptr;
 }
 

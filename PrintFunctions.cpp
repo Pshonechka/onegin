@@ -17,9 +17,9 @@ void printf_str(const char* str) {
 void put_str(const char* str, struct info *Onegin) {
     FILE* fp = Onegin -> ans;
     for(int i = 0; str[i] != '\n' && str[i] != '\0'; i++) {
-        fputs(&str[i], fp); // fputc(str[i], stream)
+        fputc(str[i], fp); // fputc(str[i], stream)
     }
-    putchar('\n');
+    fputc('\n', fp);
 }
 
 void print_text(struct info *Onegin) {
@@ -38,7 +38,7 @@ void put_text(struct info *Onegin) {
     char** array = Onegin -> array_of_pointers;
     int str_count = Onegin -> lines_count;
     for (int i = 0; i < str_count; i++) {
-        printf("line %d: ", i);
         put_str(array[i], Onegin); // my_fputs(array[i], stream)
     }
+
 }

@@ -29,7 +29,7 @@ int main() {
     opening_file(&text_sorted);
     // fseek()
     opening_file(&text_sorted_from_end);
-    FILE *output = fopen("answers.txt", "w");
+    FILE *output = fopen("answers.txt", "wb");
     if (output == 0) {
         printf("Error in opening file");
     }
@@ -45,12 +45,9 @@ int main() {
     size_file (&text_sorted_from_end);
 
     //printf("file size: %d\n", symbols_num);
-    text_sorted.buffer = get_arr(&text_sorted);
-    text_sorted_from_end.buffer = get_arr(&text_sorted);
-    //printf("text:\n %s\n", book);
-    //[a][b][c]['\n'][f][g]['\0']
-    //[0x100][0x200][0x300][0]
-    //todo: function
+    char *book = get_arr(&text_sorted);
+    text_sorted.buffer = book;
+    text_sorted_from_end.buffer = book;
     num_str (&text_sorted);
     num_str (&text_sorted_from_end);
     int str_count = text_sorted.lines_count;
@@ -58,7 +55,9 @@ int main() {
     text_sorted_from_end.array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
     fill_pointer_arr(&text_sorted);
     fill_pointer_arr(&text_sorted_from_end);
+    // put_text(&text_sorted_from_end);
 
+    //print_text (&text_sorted_from_end);
        // printf("%p", book[0]);
     //printf("printing ptrs before parsing:\n");
      //book[0] === *(book + i), &(book+i)
@@ -68,9 +67,6 @@ int main() {
         printf ("%p\n", array_of_ptr[i]);
     }*/
 
-
-
-
    /// printf("kolychestvo strok: %d\n", str_count);
   ///  printf("kolychestvo bukv: %d\n", symbols_num);
     /*printf("printing ptrs after parsing\n");
@@ -79,25 +75,21 @@ int main() {
     }*/
 
    // print_text(array_of_ptr, symbols_num);
+
     printf("printing arrays after sorting by start\n");
-    my_sort (&text_sorted, comparator);
+    // my_sort (&text_sorted, comparator);
 
-    fprintf(stdout, "line1 = %s\n", text_sorted.array_of_pointers[0]);
-    fprintf(stdout, "line2 = %s\n", text_sorted.array_of_pointers[1]);
-    fprintf(stdout, "line3 = %s\n", text_sorted.array_of_pointers[2]);
+    qsort(text_sorted.array_of_pointers, text_sorted.lines_count, sizeof(char *), comparator);
 
-    print_text (&text_sorted);
+
     put_text(&text_sorted);
-    //printf("printing arrays after sorting by end\n");
-    //char **array_reversed = My_Sort (array_of_ptr, str_count, ComparatorReverse);
-    //print_text (array_reversed, str_count);
-    //FILE *answers = fopen("answers.txt", "wb");
-    //TODO: naming,
-    /*fwrite(array_sorted, sizeof(char), str_count, answers);
-    fwrite(array_reversed, sizeof(char*), str_count, answers);
-    printf("end");*/
-    //print_text (array_reversed, str_count);*/
-  //  strcpy_1(str1, str2);
+
+    printf("printing arrays after sorting by end\n");
+    //my_sort (&text_sorted_from_end, comparator_reverse);
+    qsort (text_sorted_from_end.array_of_pointers, str_count, sizeof(char *), comparator_reverse);
+    put_text (&text_sorted_from_end);
+    fputc('\n', output);
+    fputs(text_sorted.buffer, output);
     free (text_sorted_from_end.array_of_pointers);
     free (text_sorted.array_of_pointers);
 }
