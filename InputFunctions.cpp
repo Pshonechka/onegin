@@ -5,6 +5,35 @@
 
 #include "common.h"
 #include "InputFunctions.h"
+#include "SizeFunctions.h"
+
+
+void constructor_of_struct(struct info *text_sorted, struct info *text_sorted_from_end) {
+    opening_file(text_sorted);
+    opening_file(text_sorted_from_end);
+    FILE *output = fopen("answers.txt", "wb");
+    if (output == 0) {
+        printf("Error in opening file");
+    }
+    text_sorted -> ans = output;
+    text_sorted_from_end -> ans = output;
+    size_file (text_sorted);
+    size_file (text_sorted_from_end);
+    char *book = get_arr(text_sorted);
+    text_sorted -> buffer = book;
+    text_sorted_from_end -> buffer = book;
+    num_str (text_sorted);
+    num_str (text_sorted_from_end);
+    int str_count = text_sorted -> lines_count;
+    text_sorted -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+    text_sorted_from_end -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+}
+
+void destructor_of_struct(struct info *text_sorted, struct info *text_sorted_from_end) {
+    free (text_sorted_from_end -> array_of_pointers);
+    free (text_sorted -> array_of_pointers);
+}
+
 
 void opening_file(struct info *Onegin) {
     FILE *fp = fopen("oneginfull.txt", "rb");
@@ -26,11 +55,10 @@ char *get_arr(struct info *Onegin) {
     size_t read_size = fread(ptr, sizeof(char), symbols_num, fp);
 
     if (read_size != (size_t) symbols_num) {
-        // printf("%llu", read_size);
-        printf("read_size = %d\n", read_size);
+        printf("read_size = %u\n", read_size);
         printf("symbols_num = %d\n", symbols_num);
         printf("Array sizes aren't equal\n");
-        return NULL;//todo
+        return NULL;
     }
 
     ptr[symbols_num] = '\0';

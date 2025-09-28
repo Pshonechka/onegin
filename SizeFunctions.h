@@ -3,7 +3,7 @@
 
 void size_file (struct info *Onegin);
 void num_str (struct info *Onegin);
-int strlen_1 (const char *str);
-int min(int a, int b);
+int my_strlen (const char *str);
+int min_num(int a, int b);
 
 #endif // SIZEFUNCTIONS_H

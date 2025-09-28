@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
@@ -28,21 +29,17 @@ void num_str (struct info *Onegin) {
     Onegin->lines_count = str_count;
 }
 
-int strlen_1 (const char *str) {
+int my_strlen (const char *str) {
     assert(str != NULL);
-    ///fprintf(stderr, "str = %s\n", str);
     int i = 0;
     assert(str != NULL);
-    ///fprintf(stderr, "p_str = %p\n", str);
     while (str[i] != '\0' && str[i] != '\n') {
         assert(str != NULL);
-        ///fprintf(stderr, "str = %p\n", str);
-        ///fprintf(stderr, "str[%d] = %c\n", i, str[i]);
         i++;
     }
     return i;
 }
 
-int min(int a, int b) {
+int min_num(int a, int b) {
     return a < b ? a : b;
 }
