@@ -35,7 +35,6 @@ int my_strlen (const char *str) {
     assert(str != NULL);
     while (str[i] != '\0' && str[i] != '\n') {
         assert(str != NULL);
-        printf("meow");
         i++;
     }
     return i;

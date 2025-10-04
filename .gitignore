@@ -1,0 +1,6 @@
+/.vscode
+/.git-auto
+*.exe
+*.o
+*.txt
+*.save

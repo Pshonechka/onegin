@@ -11,11 +11,11 @@ build: solver
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
 
-InputFunctions.o: InputFunctions.cpp
-	$(CC) $(CFLAGS) -c InputFunctions.cpp
-
 PrintFunctions.o: PrintFunctions.cpp
 	$(CC) $(CFLAGS) -c PrintFunctions.cpp
+
+InputFunctions.o: InputFunctions.cpp
+	$(CC) $(CFLAGS) -c InputFunctions.cpp
 
 SizeFunctions.o: SizeFunctions.cpp
 	$(CC) $(CFLAGS) -c SizeFunctions.cpp
@@ -23,11 +23,11 @@ SizeFunctions.o: SizeFunctions.cpp
 SortFunctions.o: SortFunctions.cpp
 	$(CC) $(CFLAGS) -c SortFunctions.cpp
 
-solver: main.o InputFunctions.o PrintFunctions.o SizeFunctions.o SortFunctions.o
-	$(CC) $(CFLAGS) main.o InputFunctions.o PrintFunctions.o SizeFunctions.o SortFunctions.o -o solver
+solver: main.o PrintFunctions.o InputFunctions.o SizeFunctions.o SortFunctions.o
+	$(CC) $(CFLAGS) main.o PrintFunctions.o InputFunctions.o SizeFunctions.o SortFunctions.o -o solver
 
 clean:
-	rm -rf *.o
+	rm *.o
 
 main_test: main_test.o
 	$(CC) $(CFLAGS) main_test.o -o main_test
