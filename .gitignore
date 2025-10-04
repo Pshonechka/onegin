@@ -1,5 +1,5 @@
-/.vscode
-/.git-auto
+.vscode/
+.git-auto/
 *.exe
 *.o
 *.txt
