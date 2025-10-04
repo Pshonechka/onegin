@@ -12,17 +12,8 @@ void constructor_of_struct(struct info *Onegin) {
     opening_file(&Onegin -> text, "oneginshort.txt", "rb");
     opening_file(&Onegin -> ans, "answers.txt", "wb");
     size_file (Onegin);
-
     read_text(Onegin);
-    // char *book = get_arr(Onegin);
-    // Onegin -> buffer = book;
-    // num_str (Onegin);
-
     parse_text(Onegin);
-    // int str_count = Onegin -> lines_count;
-    // Onegin -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
-    // fill_pointer_arr(&text_sorted);
-    // fill_pointer_arr(&text_sorted_from_end);
 }
 
 void read_text(struct info *Onegin) {
