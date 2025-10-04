@@ -7,27 +7,36 @@
 #include "InputFunctions.h"
 #include "SizeFunctions.h"
 
+// read_file_and_parse
+void constructor_of_struct(struct info *Onegin) {
+    opening_file(&Onegin -> text, "oneginshort.txt", "rb");
+    opening_file(&Onegin -> ans, "answers.txt", "wb");
+    size_file (Onegin);
 
-void constructor_of_struct(struct info *text_sorted, struct info *text_sorted_from_end) {
-    opening_file(text_sorted);
-    opening_file(text_sorted_from_end);
-    FILE *output = fopen("answers.txt", "wb");
-    if (output == 0) {
-        printf("Error in opening file");
-    }
-    text_sorted -> ans = output;
-    text_sorted_from_end -> ans = output;
-    size_file (text_sorted);
-    size_file (text_sorted_from_end);
-    char *book = get_arr(text_sorted);
-    text_sorted -> buffer = book;
-    text_sorted_from_end -> buffer = book;
-    num_str (text_sorted);
-    num_str (text_sorted_from_end);
-    int str_count = text_sorted -> lines_count;
-    text_sorted -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
-    text_sorted_from_end -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+    read_text(Onegin);
+    // char *book = get_arr(Onegin);
+    // Onegin -> buffer = book;
+    // num_str (Onegin);
+
+    parse_text(Onegin);
+    // int str_count = Onegin -> lines_count;
+    // Onegin -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+    // fill_pointer_arr(&text_sorted);
+    // fill_pointer_arr(&text_sorted_from_end);
 }
+
+void read_text(struct info *Onegin) {
+    char *book = get_arr(Onegin);
+    Onegin -> buffer = book;
+    num_str (Onegin);
+}
+
+void parse_text(struct info *Onegin) {
+    int str_count = Onegin -> lines_count;
+    Onegin -> array_of_pointers = (char**) calloc((str_count+1), sizeof(char*));
+    fill_pointer_arr(Onegin);
+}
+
 
 void destructor_of_struct(struct info *text_sorted, struct info *text_sorted_from_end) {
     free (text_sorted_from_end -> array_of_pointers);
@@ -35,12 +44,13 @@ void destructor_of_struct(struct info *text_sorted, struct info *text_sorted_fro
 }
 
 
-void opening_file(struct info *Onegin) {
-    FILE *fp = fopen("oneginfull.txt", "rb");
-    if (fp == 0) {
+int opening_file(FILE **to, const char* file_name, const char* method) {
+    *to = fopen(file_name, method);
+    if (*to == 0) {
         printf("Error in opening file");
+        return 1;
     }
-    Onegin -> text = fp;
+    return 0;
 }
 
 char *get_arr(struct info *Onegin) {

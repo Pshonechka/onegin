@@ -43,9 +43,11 @@ int comparator_reverse (const void *par1, const void *par2) {
     const char *str2 =  *(const char * const*) par2;
     int l1 = my_strlen(str1);
     int l2 = my_strlen(str2);
+    printf("meow");
     int minl = min_num(l1,l2);
     int i1 = l1;
     int i2 = l2;
+    printf("meow");
     while (i1 > 0 && i2 > 0) {
 
         int k1 = skip_rev(str1, i1);
@@ -103,11 +105,13 @@ void my_sort (struct info *Onegin, int (* my_compare)(const void *, const void *
     for (i = 0; i < str_count - 1; i++) {
         for (j = 0; j < str_count - 1 - i; j++) {
             if (my_compare(array_of_ptr[j], array_of_ptr[j+1]) > 0) {
+                printf("meow");
                 char *c = array_of_ptr[j];
                 array_of_ptr[j] = array_of_ptr[j+1];
                 array_of_ptr[j+1] = c;
             }
         }
     }
+    printf("meow");
 }
 

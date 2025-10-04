@@ -35,11 +35,13 @@ void print_text(struct info *Onegin) {
 void put_text(struct info *Onegin) {
     assert(Onegin != NULL);
     assert(Onegin->array_of_pointers != NULL);
+    FILE* fp = Onegin -> ans;
 
     char** array = Onegin -> array_of_pointers;
     int str_count = Onegin -> lines_count;
     for (int i = 0; i < str_count; i++) {
         put_str(array[i], Onegin);
     }
+    fputc('\n', fp);
 
 }
