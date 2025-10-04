@@ -14,7 +14,6 @@ void printf_str(const char* str) {
     putchar('\n');
 }
 
-
 void put_str(const char* str, struct info *Onegin) {
     FILE* fp = Onegin -> ans;
     for(int i = 0; str[i] != '\n' && str[i] != '\0'; i++) {

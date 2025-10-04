@@ -8,7 +8,6 @@
 #include "SortFunctions.h"
 #include "SizeFunctions.h"
 
-
 int comparator (const void *par1, const void *par2) {
     assert(par1 != NULL);
     assert(par2 != NULL);
@@ -69,7 +68,6 @@ int comparator_reverse (const void *par1, const void *par2) {
     return 0;
 }
 
-
 int skip_to_alpha(const char *str, int l, int x) {
     if (isalpha(str[x]) != 0) {
         return 0;
@@ -96,8 +94,6 @@ int skip_rev(const char *str, int x) {
     return c;
 }
 
-
-
 void my_sort (struct info *Onegin, int (* my_compare)(const void *, const void *)) {
     char **array_of_ptr = Onegin -> array_of_pointers;
     int str_count = Onegin -> lines_count;
@@ -112,4 +108,3 @@ void my_sort (struct info *Onegin, int (* my_compare)(const void *, const void *
         }
     }
 }
-

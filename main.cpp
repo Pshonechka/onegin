@@ -9,7 +9,6 @@
 #include "SizeFunctions.h"
 #include "SortFunctions.h"
 
-
 int main() {
     struct info text_sorted = {};
     struct info text_sorted_from_end = {};
