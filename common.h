@@ -1,7 +1,6 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-
 struct info {
     FILE *text;
     char *buffer;
@@ -10,7 +9,5 @@ struct info {
     size_t symbols_count;
     FILE *ans;
 };
-
-
 
 #endif // COMMON_H
