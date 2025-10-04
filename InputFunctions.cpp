@@ -28,8 +28,7 @@ void parse_text(struct info *Onegin) {
     fill_pointer_arr(Onegin);
 }
 
-void destructor_of_struct(struct info *text_sorted, struct info *text_sorted_from_end) {
-    free (text_sorted_from_end -> array_of_pointers);
+void destructor_of_struct(struct info *text_sorted) {
     free (text_sorted -> array_of_pointers);
 }
 

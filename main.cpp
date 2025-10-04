@@ -11,18 +11,16 @@
 
 int main() {
     struct info text_sorted = {};
-    struct info text_sorted_from_end = {};
 
-    constructor_of_struct(&text_sorted_from_end);
-    text_sorted = text_sorted_from_end;
+    constructor_of_struct(&text_sorted);
 
     qsort(text_sorted.array_of_pointers, text_sorted.lines_count, sizeof(char *), comparator);
     put_text(&text_sorted);
 
-    my_sort (&text_sorted_from_end, comparator_reverse);
-    put_text (&text_sorted_from_end);
+    my_sort (&text_sorted, comparator_reverse);
+    put_text (&text_sorted);
 
     fputs(text_sorted.buffer, text_sorted.ans);
 
-    destructor_of_struct(&text_sorted, &text_sorted_from_end);
+    destructor_of_struct(&text_sorted);
 }
